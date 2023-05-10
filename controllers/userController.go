@@ -24,25 +24,6 @@ func LoginUserController(c echo.Context) error {
 	})
 }
 
-func GetUserDetailControllers(c echo.Context) error {
-	id, err := strconv.Atoi(c.Param("id"))
-
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
-
-	users, err := database.GetDetailUsers((id))
-
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
-
-	return c.JSON(http.StatusOK, map[string]interface{}{
-		"status": "success",
-		"users":  users,
-	})
-}
-
 // get all users
 func GetUsersController(c echo.Context) error {
 	if c.Request().Method != http.MethodGet {
@@ -147,8 +128,13 @@ func UpdateUserController(c echo.Context) error {
 		})
 	}
 
+	user.Nis = body.Nis
+	user.Name = body.Name
 	user.Username = body.Username
 	user.Password = body.Password
+	user.Email = body.Email
+	user.JenisKelamin = body.JenisKelamin
+	user.TahunAjaran = body.TahunAjaran
 
 	if err := config.DB.Save(&user).Error; err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
