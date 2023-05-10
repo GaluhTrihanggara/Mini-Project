@@ -6,9 +6,8 @@ import (
 
 type Payment struct {
 	gorm.Model
-	IdPayment   int    `gorm:"primaryKey" json:"id_payment"`
-	UserId      int    `json:"user_id"`
-	Description string `json:"description"`
-	Amount      int    `json:"amount"`
-	Status      string `json:"status"`
+	BillId int    `json:"bill_id"`
+	UserId int    `json:"user_id"`
+	Amount int    `json:"amount"`
+	Status string `json:"status"`
 }
