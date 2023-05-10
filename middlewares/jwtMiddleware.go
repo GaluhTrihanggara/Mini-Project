@@ -18,13 +18,3 @@ func CreateToken(userId int) (string, error) {
 	return token.SignedString([]byte(constants.SECRET_JWT))
 
 }
-
-func ExtractTokenUserId(e echo.Context) int {
-	user := e.Get("user").(*jwt.Token)
-	if user.Valid {
-		claims := user.Claims.(jwt.MapClaims)
-		userId := claims["userId"].(int)
-		return userId
-	}
-	return 0
-}
