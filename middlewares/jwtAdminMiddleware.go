@@ -17,12 +17,3 @@ func CreateAdminToken(adminId int) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString([]byte(constants.SECRET_JWT))
 }
-func ExtractTokenAdminId(e echo.Context) int {
-	admin := e.Get("admin").(*jwt.Token)
-	if admin.Valid {
-		claims := admin.Claims.(jwt.MapClaims)
-		adminId := claims["adminId"].(int)
-		return adminId
-	}
-	return 0
-}
