@@ -7,11 +7,10 @@ import (
 type User struct {
 	gorm.Model
 	Nis          int    `json:"nis"`
-	Username     string `json:"username" form:"username"`
-	Email        string `json:"email" form:"email"`
-	Password     string `json:"password" form:"password"`
 	Name         string `json:"name" form:"name"`
-	IdKelas      string `json:"id_kelas" form:"id_kelas"`
+	Username     string `json:"username" form:"username"`
+	Password     string `json:"password" form:"password"`
+	Email        string `json:"email" form:"email"`
 	JenisKelamin string `json:"jenis_kelamin" form:"jenis_kelamin"`
 	TahunAjaran  string `json:"tahun_ajaran" form:"tahun_ajaran"`
 }
