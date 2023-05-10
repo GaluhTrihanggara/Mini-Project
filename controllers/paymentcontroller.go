@@ -47,7 +47,6 @@ func GetPaymentsController(c echo.Context) error {
 	})
 }
 
-// GetPaymentController will get a single payment data by id
 func GetPaymentController(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -57,7 +56,7 @@ func GetPaymentController(c echo.Context) error {
 		})
 	}
 	var payment models.Payment
-	if err := config.DB.First(&payment, id).Error; err != nil {
+	if err := config.DB.Where("id = ?", id).First(&payment).Error; err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"status": "failed to get payment data",
 			"error":  err.Error(),
@@ -92,8 +91,8 @@ func UpdatePaymentController(c echo.Context) error {
 			"status": "payment tidak tersedia",
 		})
 	}
+	payment.BillId = body.BillId
 	payment.UserId = body.UserId
-	payment.Description = body.Description
 	payment.Amount = body.Amount
 	payment.Status = body.Status
 
