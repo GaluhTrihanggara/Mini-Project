@@ -34,8 +34,11 @@ func New() *echo.Echo {
 	adminGroup.PUT("/:id", controllers.UpdateAdminController)
 	adminGroup.DELETE("/:id", controllers.DeleteAdminController)
 	
+	// Route /users to handler function
 	adminGroup.GET("/users", controllers.GetUsersController)
 	adminGroup.GET("/users/:id", controllers.GetUserController)
+	adminGroup.PUT("/users/:id", controllers.UpdateUserController)
+	adminGroup.DELETE("/users/:id", controllers.DeleteUserController)
 
 	// Route /bills to handler function
 	adminGroup.POST("/bills", controllers.CreateBillController)
