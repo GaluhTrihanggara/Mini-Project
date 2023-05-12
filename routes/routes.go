@@ -52,6 +52,7 @@ func New() *echo.Echo {
 	adminGroup.DELETE("/payments/:id", controllers.DeletePaymentController)
 
 	// Group routes for histories accessible only by admin
+	adminGroup.GET("/histories", controllers.GetHistoriesController)
 	adminGroup.GET("/history/payment/:id", controllers.GetHistoriesByPaymentController)
 	adminGroup.POST("/history", controllers.CreateHistoryController)
 	adminGroup.PUT("/history/:id", controllers.UpdateHistoryController)
